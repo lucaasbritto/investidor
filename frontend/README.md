@@ -1,48 +1,5 @@
-## Instalação
+# Vue 3 + TypeScript + Vite
 
-1. **Clone o repositório**
+This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-```bash
-git clone https://github.com/lucaasbritto/Laravel-Vue.git
-cd php-vue
-```
-
-2. **Copie o arquivo de ambiente para produção**
-```bash
-  cp backend/.env.example backend/.env
-```
-
-3. **Configure o nome do banco em .env**
-```env
-DB_DATABASE=laravel
-```
-
-4. **Suba os containers com Docker**
-```shell
-  docker-compose up --build -d
-```
-
-5. **Entre no container**
-```shell
-  docker exec -it laravel_app_nomeProjeto bash
-```
-
-6. **Gere a chave da aplicação**
-```shell
-  php artisan key:generate
-```
-
-7. **Gere a chave JWT**
-```shell
-  php artisan jwt:secret
-```
-
-8. **Rode as migrações**
-```shell
-  php artisan migrate
-```
-
-
-## Acessos
-  - Front-end: http://localhost:5173
-  - Back-end (API): http://localhost:8080/api
+Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
