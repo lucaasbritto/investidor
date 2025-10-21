@@ -3,7 +3,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: laravel_app_nomeProjeto
+    container_name: laravel_app_investidor
     volumes:
       - ./backend:/var/www/html
     ports:
@@ -11,11 +11,11 @@ services:
     depends_on:
       - db
     networks:
-      - nomeProjeto-network
+      - investidor-network
 
   webserver:
     image: nginx:alpine
-    container_name: laravel_web_nomeProjeto
+    container_name: laravel_web_investidor
     ports:
       - "8080:80"
     volumes:
@@ -24,11 +24,11 @@ services:
     depends_on:
       - backend
     networks:
-      - nomeProjeto-network
+      - investidor-network
 
   db:
     image: mysql:8.0
-    container_name: laravel_db_nomeProjeto
+    container_name: laravel_db_investidor
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: laravel
@@ -39,23 +39,23 @@ services:
       - dbdata:/var/lib/mysql
       - ./_docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - nomeProjeto-network
+      - investidor-network
 
   frontend:
     build:
       context: ./frontend
-    container_name: vue_frontend_nomeProjeto
+    container_name: vue_frontend_investidor
     volumes:
       - ./frontend:/app
       - /app/node_modules
     ports:
       - "5173:5173"
     networks:
-      - nomeProjeto-network
+      - investidor-network
 
 volumes:
   dbdata:
 
 networks:
-  nomeProjeto-network:
+  investidor-network:
     driver: bridge

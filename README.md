@@ -3,8 +3,8 @@
 1. **Clone o repositório**
 
 ```bash
-git clone https://github.com/lucaasbritto/Laravel-Vue.git
-cd php-vue
+git clone https://github.com/lucaasbritto/investidor.git
+cd investidor
 ```
 
 2. **Copie o arquivo de ambiente para produção**
@@ -14,7 +14,7 @@ cd php-vue
 
 3. **Configure o nome do banco em .env**
 ```env
-DB_DATABASE=laravel
+DB_DATABASE=investidor
 ```
 
 4. **Suba os containers com Docker**
@@ -24,7 +24,7 @@ DB_DATABASE=laravel
 
 5. **Entre no container**
 ```shell
-  docker exec -it laravel_app_nomeProjeto bash
+  docker exec -it laravel_app_investidor bash
 ```
 
 6. **Gere a chave da aplicação**
