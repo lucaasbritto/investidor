@@ -10,7 +10,12 @@ import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/dist/quasar.css'
 import 'quasar/src/css/index.sass'
 
+import { createPinia } from 'pinia'
+
 const app = createApp(App)
+const pinia = createPinia()
+
+app.use(pinia)
 
 app.config.globalProperties.$api = api
 

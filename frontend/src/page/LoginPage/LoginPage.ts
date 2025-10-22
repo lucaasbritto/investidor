@@ -1,6 +1,6 @@
 import { ref } from 'vue'
-import api from '@/api'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 
 export function LoginPageScript() {
   const email = ref('')
@@ -8,22 +8,18 @@ export function LoginPageScript() {
   const loading = ref(false)
   const error = ref('')
   const router = useRouter()
+  const userStore = useUserStore()
 
   const handleLogin = async () => {
     loading.value = true
     error.value = ''
     try {
-      const response = await api.post('/login', {
-        email: email.value,
-        password: password.value
-      })
 
-      const token = response.data.access_token
-      localStorage.setItem('token', token)
+      await userStore.login(email.value, password.value)
 
       router.push('/')
     } catch (err: any) {
-      error.value = err.response?.data?.error || 'Erro ao fazer login'
+      error.value = err.message || 'Erro ao fazer login'
     } finally {
       loading.value = false
     }
