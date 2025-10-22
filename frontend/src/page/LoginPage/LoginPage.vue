@@ -47,11 +47,12 @@
 
         <q-banner
           v-if="error"
-          class="bg-red-2 text-red q-mt-md"
+          class="bg-red-1 text-red-9 q-mt-md q-pa-sm flex items-center"
           dense
           rounded
         >
-          {{ error }}
+          <q-icon name="warning" class="q-mr-sm" />
+          <span>{{ error }}</span>
         </q-banner>
       </q-form>
 

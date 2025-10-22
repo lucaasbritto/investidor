@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import LoginPage from '@/page/LoginPage/LoginPage.vue'
-
+import DashboardPage from '@/page/DashboardPage/DashboardPage.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -8,6 +8,12 @@ const routes: RouteRecordRaw[] = [
     name: 'Login',
     component: LoginPage
   },  
+  { 
+    path: '/',
+    name: 'Dashboard',
+    component: DashboardPage,
+    meta: { requiresAuth: true }
+  }  
 ]
 
 
@@ -18,11 +24,21 @@ const router = createRouter({
 
 router.beforeEach((to, _from, next) => {
   const token = localStorage.getItem('token')
-  if (to.meta.requiresAuth && !token) {
-    next('/login')
-  } else {
-    next()
+
+  if (to.path === '/') {
+    if (!token) return next('/login')
+    return next()
   }
+
+  if (to.meta.requiresAuth && !token) {
+    return next('/login')
+  }
+
+  if (to.path === '/login' && token) {
+    return next('/')
+  }
+  
+  next()
 })
 
 export default router
