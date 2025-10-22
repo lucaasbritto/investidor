@@ -38,11 +38,11 @@
 </template>
 
 <script setup>
-import headerScript from './HeaderComponent.js'
+import headerScript from './Header.js'
 
 const { user, logout } = headerScript()
 </script>
 
 <style scoped lang="scss">
-  @use './HeaderComponent.scss'; 
+  @use './Header.scss'; 
 </style>
