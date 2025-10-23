@@ -4,15 +4,17 @@ import { fetchNews, type News } from '@/api/news'
 export function NewListScript() {
   const newsList = ref<News[]>([])
   const loading = ref(false)
+  const showModal = ref(false)
+  const selectedNews = ref<News | null>(null)
 
-  const truncate = (text: string, max = 100) => {
-    return text.length > max ? text.substring(0, max) + '...' : text;
-  }
+  const truncate = (text: string, max = 100) =>
+    text.length > max ? text.substring(0, max) + '...' : text
 
   const truncateTitle = (title: string, max = 50) => truncate(title, max)
 
   const openNews = (news: News) => {
-    console.log('Abrindo notícia:', news.title)
+    selectedNews.value = news
+    showModal.value = true
   }
 
   onMounted(async () => {
@@ -31,6 +33,8 @@ export function NewListScript() {
     loading,
     truncate,
     truncateTitle,
-    openNews
+    openNews,
+    showModal,
+    selectedNews,
   }
 }

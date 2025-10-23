@@ -44,15 +44,29 @@
         </q-card>
       </div>
     </div>
+
+    <NewsDetailModal
+      v-model="showModal"
+      :news="selectedNews"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-    import { NewListScript } from './NewsList'
+import { NewListScript } from './NewsList'
+import NewsDetailModal from '../NewsModal/NewsDetailModal.vue'
 
-    const { newsList, loading, truncate, truncateTitle, openNews } = NewListScript()
+const {
+  newsList,
+  loading,
+  truncate,
+  truncateTitle,
+  openNews,
+  showModal,
+  selectedNews,
+} = NewListScript()
 </script>
 
 <style lang="scss" scoped>
-    @use './NewsList.scss'; 
+@use './NewsList.scss';
 </style>
