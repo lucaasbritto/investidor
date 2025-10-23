@@ -1,6 +1,6 @@
 import { ref, onMounted } from 'vue'
-import { fetchNews, type News, createNews, updateNews, type CreateNewsPayload } from '@/api/news'
-import { Notify } from 'quasar'
+import { fetchNews, type News, createNews, updateNews, deleteNews as apiDeleteNews, type CreateNewsPayload } from '@/api/news'
+import { Notify, Dialog  } from 'quasar'
 import { useCategories } from '@/stores/category'
 
 export interface EditableNews {
@@ -13,6 +13,7 @@ export interface EditableNews {
 export function useNewsList() {
   const newsList = ref<News[]>([])
   const loading = ref(false)
+  const deletingId = ref<number | null>(null)
 
   const showDetailModal = ref(false)
   const selectedNews = ref<News | null>(null)
@@ -94,14 +95,41 @@ export function useNewsList() {
   }
 
   const deleteNews = async (news: News) => {
-    if (!confirm('Deseja realmente excluir esta notícia?')) return
-    Notify.create({ message: 'Funcionalidade de exclusão não implementada', color: 'warning' })
+    Dialog.create({
+      title: 'Confirmar exclusão',
+      message: `Deseja realmente excluir a notícia "${news.title}"?`,
+      cancel: true,
+      persistent: true,
+    })
+      .onOk(async () => {
+        try {
+          deletingId.value = news.id
+          await apiDeleteNews(news.id)
+          newsList.value = newsList.value.filter(n => n.id !== news.id)
+
+          Notify.create({
+            message: 'Notícia excluída com sucesso!',
+            color: 'positive',
+            icon: 'check_circle',
+          })
+        } catch (err) {
+          console.error(err)
+          Notify.create({
+            message: 'Erro ao excluir notícia',
+            color: 'negative',
+            icon: 'error',
+          })
+        } finally {
+          deletingId.value = null
+        }
+      })
   }
 
   return {
     newsList,
     categories,
     loading,
+    deletingId,
     truncate,
     truncateTitle,
     showDetailModal,

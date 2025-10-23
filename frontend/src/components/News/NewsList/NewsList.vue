@@ -6,7 +6,11 @@
 
     <div v-else class="row q-col-gutter-md justify-start">
       <div v-for="news in newsList" :key="news.id" class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <q-card class="news-card">
+        <q-card class="news-card relative-position">
+          <q-inner-loading :showing="deletingId === news.id">
+            <q-spinner color="primary" size="30px" />
+          </q-inner-loading>
+
           <q-card-section class="q-pa-sm">
             <div class="flex items-center justify-between">
               <span class="news-category">{{ news.category?.name }}</span>
@@ -52,6 +56,7 @@ const {
   newsList,
   categories,
   loading,
+  deletingId,
   truncate,
   truncateTitle,
   showDetailModal,

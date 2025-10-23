@@ -28,4 +28,10 @@ class NewsService
 
         return $news;
     }
+
+    public function deleteNews($id){
+        $news = News::findOrFail($id);
+        $news->delete();
+        return $news;
+    }
 }

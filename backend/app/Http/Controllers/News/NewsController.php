@@ -31,5 +31,13 @@ class NewsController extends Controller
         $news = $this->newsService->updateNews($id, $request->validated());
         return new NewsResource($news);
     }
+
+    public function destroy($id){
+    $news = $this->newsService->deleteNews($id);
+    return response()->json([
+        'message' => 'Notícia excluída com sucesso!',
+        'data' => new NewsResource($news)
+    ], 200);
+}
     
 }

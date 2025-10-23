@@ -51,3 +51,13 @@ export async function updateNews(id: number, payload: UpdateNewsPayload): Promis
     throw new Error(error.response?.data?.message || 'Erro ao atualizar notícia')
   }
 }
+
+export async function deleteNews(id: number): Promise<void> {
+  try {
+    const response = await api.delete(`/news/${id}`)
+    return response.data
+  } catch (error: any) {
+    console.error('Erro ao excluir notícia:', error)
+    throw new Error(error.response?.data?.message || 'Erro ao excluir notícia')
+  }
+}

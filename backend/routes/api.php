@@ -16,7 +16,8 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('news')->group(function () {
         Route::get('/', [NewsController::class, 'index']);
         Route::post('/', [NewsController::class, 'store']);
-        Route::put('{id}', [NewsController::class, 'update']);        
+        Route::put('{id}', [NewsController::class, 'update']);
+        Route::delete('{id}', [NewsController::class, 'destroy']);        
     });
 
     Route::prefix('categories')->group(function () {
