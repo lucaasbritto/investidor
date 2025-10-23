@@ -26,8 +26,8 @@
     />
 
     <div class="row justify-end q-gutter-sm">
-      <q-btn flat label="Cancelar" color="grey" @click="emit('cancel')" />
-      <q-btn color="primary" :label="submitLabel" type="submit" :loading="loading" />
+      <q-btn flat label="Cancelar" color="grey" size="xs" @click="emit('cancel')" />
+      <q-btn color="primary" :label="submitLabel" type="submit" :loading="loading" size="xs" />
     </div>
   </q-form>
 </template>
