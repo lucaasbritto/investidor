@@ -12,4 +12,8 @@ class NewsService
             ->latest()
             ->paginate(10);
     }
+
+    public function createNews(array $data){
+        return News::create($data);
+    }
 }

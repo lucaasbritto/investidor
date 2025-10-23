@@ -14,7 +14,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::prefix('news')->group(function () {
-        Route::get('/', [NewsController::class, 'index']);        
+        Route::get('/', [NewsController::class, 'index']);
+        Route::post('/', [NewsController::class, 'store']);        
     });
 
     Route::prefix('categories')->group(function () {

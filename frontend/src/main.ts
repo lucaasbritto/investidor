@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { Quasar } from 'quasar'
+import { Quasar,Dialog,Notify } from 'quasar'
 import router from './router'
 import App from './App.vue'
 import api from './api'
@@ -20,7 +20,10 @@ app.use(pinia)
 app.config.globalProperties.$api = api
 
 app.use(Quasar, {
-  plugins: {},
+  plugins: {
+    Dialog, 
+    Notify
+  },
   iconSet: quasarIconSet, 
 })
 app.use(router)

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\NewsResource;
 use App\Services\NewsService;
+use App\Http\Requests\StoreNewsRequest;
 
 class NewsController extends Controller
 {
@@ -19,6 +20,11 @@ class NewsController extends Controller
         $news = $this->newsService->getNews();
         
         return NewsResource::collection($news);
+    }
+
+    public function store(StoreNewsRequest $request){
+        $news = $this->newsService->createNews($request->validated());
+        return new NewsResource($news);
     }
     
 }

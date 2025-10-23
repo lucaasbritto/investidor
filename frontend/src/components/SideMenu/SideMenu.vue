@@ -36,7 +36,7 @@
         <q-item-section>Listar</q-item-section>
       </q-item>
 
-      <q-item clickable v-ripple to="/books/new" exact active-class="menu-item-active" dense>
+      <q-item clickable v-ripple @click="$router.push('/news/create')" dense>
         <q-item-section avatar>
           <q-icon name="post_add" size="13px" />
         </q-item-section>

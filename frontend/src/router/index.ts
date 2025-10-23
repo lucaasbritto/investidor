@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import LoginPage from '@/page/LoginPage/LoginPage.vue'
 import DashboardPage from '@/page/DashboardPage/DashboardPage.vue'
+import NewsAdd from '@/components/NewsList/NewsAdd/NewsAdd.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -13,7 +14,13 @@ const routes: RouteRecordRaw[] = [
     name: 'Dashboard',
     component: DashboardPage,
     meta: { requiresAuth: true }
-  }  
+  },
+  {
+    path: '/news/create',
+    name: 'NewsAdd',
+    component: NewsAdd,
+    meta: { requiresAuth: true }
+  },  
 ]
 
 

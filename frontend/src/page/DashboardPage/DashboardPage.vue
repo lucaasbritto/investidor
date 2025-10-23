@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import NewsList from '@/components/NewsList/NewsList.vue'
+import NewsList from '@/components/NewsList/NewsList/NewsList.vue'
 </script>
 
 <style lang="scss" scoped>
