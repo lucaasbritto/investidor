@@ -15,6 +15,16 @@ export async function loadCategories() {
   return categories.value
 }
 
+
+export async function reloadCategories() {
+  loading.value = true
+  try {
+    categories.value = await fetchCategories()
+  } finally {
+    loading.value = false
+  }
+}
+
 export function useCategories() {
-  return { categories, loading, loadCategories }
+  return { categories, loading, loadCategories, reloadCategories }
 }

@@ -1,0 +1,27 @@
+.q-hoverable {
+  transition: background-color 0.15s ease;
+}
+.q-hoverable:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.q-table.rounded-borders {
+  border-radius: 8px;
+}
+
+.q-btn {
+  min-width: 28px;
+  height: 28px;
+  font-size: 0.75rem;
+  padding: 0 6px;
+}
+
+.q-table .q-td,
+.q-table .q-th {
+  font-size: 0.8rem;
+}
+
+.q-table .q-td span,
+.q-table .q-th span {
+  font-size: 0.8rem;
+}

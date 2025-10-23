@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import LoginPage from '@/page/LoginPage/LoginPage.vue'
 import DashboardPage from '@/page/DashboardPage/DashboardPage.vue'
 import NewsAdd from '@/components/News/NewsAdd/NewsAdd.vue'
+import CategoryList from '@/components/Category/CategoryList/CategoryList.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -20,7 +21,13 @@ const routes: RouteRecordRaw[] = [
     name: 'NewsAdd',
     component: NewsAdd,
     meta: { requiresAuth: true }
-  },  
+  }, 
+  {
+    path: '/category/',
+    name: 'CategoryList',
+    component: CategoryList,
+    meta: { requiresAuth: true }
+  },   
 ]
 
 

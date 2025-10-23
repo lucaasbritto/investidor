@@ -48,14 +48,14 @@
         Categorias
       </div>
 
-      <q-item clickable v-ripple to="/authors" exact active-class="menu-item-active" dense>
+      <q-item clickable v-ripple @click="$router.push('/category')" exact active-class="menu-item-active" dense>
         <q-item-section avatar>
           <q-icon name="group" size="13px" />
         </q-item-section>
         <q-item-section>Listar</q-item-section>
       </q-item>
 
-      <q-item clickable v-ripple to="/authors/new" exact active-class="menu-item-active" dense>
+      <q-item clickable v-ripple @click="$router.push('/category/create')" exact active-class="menu-item-active" dense>
         <q-item-section avatar>
           <q-icon name="person_add" size="13px" />
         </q-item-section>
