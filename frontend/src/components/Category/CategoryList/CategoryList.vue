@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div class="q-pa-md position-relative">
 
     <div class="row justify-between items-center q-mb-md">
       <div class="text-h6">Categorias</div>
@@ -27,6 +27,10 @@
       </template>
     </q-table>
 
+    <div v-if="deletingCategory" class="overlay-spinner">
+      <q-spinner-dots size="50px" color="white" />
+    </div>
+
     <CategoryEditModal
       v-model="showEditModal"
       :category="selectedCategory"
@@ -49,6 +53,7 @@ import CategoryCreateModal from '../CategoryModal/CategoryCreateModal.vue'
 const {
   categories,
   loading,
+  deletingCategory,
   columns,
   showEditModal,
   showCreateModal,

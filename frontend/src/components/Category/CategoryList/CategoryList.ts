@@ -16,6 +16,8 @@ export function useCategoryList() {
   const showCreateModal = ref(false)
   const selectedCategory = ref<CategoryRow | null>(null)
 
+  const deletingCategory = ref(false)
+
   const columns: QTableColumn<CategoryRow>[] = [
     { name: 'id', label: 'ID', field: 'id', align: 'left', sortable: true },
     { name: 'name', label: 'Nome', field: 'name', align: 'left', sortable: true },
@@ -27,9 +29,7 @@ export function useCategoryList() {
     showEditModal.value = true
   }
 
-  const openCreateModal = () => {
-    showCreateModal.value = true
-  }
+  const openCreateModal = () => showCreateModal.value = true
 
   const confirmDelete = (category: CategoryRow) => {
     Dialog.create({
@@ -39,12 +39,15 @@ export function useCategoryList() {
       persistent: true,
     }).onOk(async () => {
       try {
+        deletingCategory.value = true
         await deleteCategory(category.id)
         categories.value = categories.value.filter(c => c.id !== category.id)
         Notify.create({ message: 'Categoria excluída!', color: 'positive' })
       } catch (err) {
         console.error(err)
         Notify.create({ message: 'Erro ao excluir categoria', color: 'negative' })
+      } finally {
+        deletingCategory.value = false
       }
     })
   }
@@ -58,6 +61,7 @@ export function useCategoryList() {
   return {
     categories,
     loading,
+    deletingCategory,
     columns,
     showEditModal,
     showCreateModal,

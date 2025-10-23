@@ -19,12 +19,14 @@
 import { ref, watch, computed } from 'vue'
 import { updateCategory } from '@/api/category'
 import { Notify } from 'quasar'
+import { useCategories } from '@/stores/category'
 
 const props = defineProps<{ modelValue: boolean; category: any }>()
 const emit = defineEmits(['update:modelValue', 'updated'])
 
 const form = ref({ name: '' })
 const loading = ref(false)
+const { reloadCategories } = useCategories()
 
 const localModel = computed({
   get: () => props.modelValue,
@@ -45,8 +47,11 @@ const update = async () => {
     loading.value = true
     await updateCategory(props.category.id, form.value)
     Notify.create({ message: 'Categoria atualizada!', color: 'positive' })
+
+    await reloadCategories()
+
     emit('updated')
-    close()
+    emit('update:modelValue', false)
   } catch (err) {
     console.error(err)
     Notify.create({ message: 'Erro ao atualizar categoria', color: 'negative' })

@@ -19,12 +19,14 @@
 import { ref, computed, watch } from 'vue'
 import { createCategory } from '@/api/category'
 import { Notify } from 'quasar'
+import { useCategories } from '@/stores/category'
 
 const props = defineProps<{ modelValue: boolean }>()
 const emit = defineEmits(['update:modelValue', 'created'])
 
 const form = ref({ name: '' })
 const loading = ref(false)
+const { reloadCategories } = useCategories()
 
 const localModel = computed({
   get: () => props.modelValue,
@@ -45,8 +47,11 @@ const save = async () => {
     loading.value = true
     await createCategory(form.value)
     Notify.create({ message: 'Categoria criada!', color: 'positive' })
+
+    await reloadCategories()
+
     emit('created')
-    close()
+    emit('update:modelValue', false)
   } catch (err) {
     console.error(err)
     Notify.create({ message: 'Erro ao criar categoria', color: 'negative' })

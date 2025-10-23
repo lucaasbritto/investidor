@@ -23,6 +23,7 @@ export async function reloadCategories() {
   } finally {
     loading.value = false
   }
+  return categories.value
 }
 
 export function useCategories() {
