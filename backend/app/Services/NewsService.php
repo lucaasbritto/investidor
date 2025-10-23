@@ -16,4 +16,16 @@ class NewsService
     public function createNews(array $data){
         return News::create($data);
     }
+
+    public function updateNews($id, array $data){
+        $news = News::findOrFail($id);
+
+        if (!$news) {
+            throw new \Exception('Notícia não encontrada');
+        }
+
+        $news->update($data);
+
+        return $news;
+    }
 }

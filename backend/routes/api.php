@@ -15,7 +15,8 @@ Route::middleware('auth:api')->group(function () {
 
     Route::prefix('news')->group(function () {
         Route::get('/', [NewsController::class, 'index']);
-        Route::post('/', [NewsController::class, 'store']);        
+        Route::post('/', [NewsController::class, 'store']);
+        Route::put('{id}', [NewsController::class, 'update']);        
     });
 
     Route::prefix('categories')->group(function () {

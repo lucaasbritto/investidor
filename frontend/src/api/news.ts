@@ -16,6 +16,12 @@ export interface CreateNewsPayload {
   category_id: number
 }
 
+export interface UpdateNewsPayload {
+  title?: string
+  content?: string
+  category_id?: number
+}
+
 export async function fetchNews(): Promise<News[]> {
   try {
     const response = await api.get('/news')
@@ -33,5 +39,15 @@ export async function createNews(payload: CreateNewsPayload): Promise<News> {
   } catch (error: any) {
     console.error('Erro ao criar notícia:', error)
     throw new Error(error.response?.data?.message || 'Erro ao criar notícia')
+  }
+}
+
+export async function updateNews(id: number, payload: UpdateNewsPayload): Promise<News> {
+  try {
+    const response = await api.put(`/news/${id}`, payload)
+    return response.data.data
+  } catch (error: any) {
+    console.error('Erro ao atualizar notícia:', error)
+    throw new Error(error.response?.data?.message || 'Erro ao atualizar notícia')
   }
 }
