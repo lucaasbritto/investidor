@@ -16,9 +16,33 @@
               <span class="news-category">
                 {{ news.category?.name }}
               </span>
+
+              <div class="action-icons">
+                <q-btn
+                  flat
+                  dense
+                  round
+                  size="xs"
+                  icon="edit"
+                  color="amber-7"
+                  @click="editNews(news)"
+                  class="q-mr-xs"
+                  title="Editar Notícia"
+                />
+                <q-btn
+                  flat
+                  dense
+                  round
+                  size="xs"
+                  icon="delete"
+                  color="negative"
+                  @click="deleteNews(news)"
+                  title="Excluir Notícia"
+                />
+              </div>
             </div>
 
-            <div class="news-title text-weight-medium">
+            <div class="news-title text-weight-medium q-mt-xs">
               {{ truncateTitle(news.title) }}
             </div>
 
@@ -64,6 +88,8 @@ const {
   openNews,
   showModal,
   selectedNews,
+  editNews,
+  deleteNews
 } = NewListScript()
 </script>
 

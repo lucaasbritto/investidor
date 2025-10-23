@@ -17,6 +17,14 @@ export function NewListScript() {
     showModal.value = true
   }
 
+  const editNews = (news: News) => {
+    console.log('Editar notícia:', news.id)
+  }
+
+  const deleteNews = async (news: News) => {
+    console.log('Excluir notícia:', news.id)
+  }
+
   onMounted(async () => {
     loading.value = true
     try {
@@ -36,5 +44,7 @@ export function NewListScript() {
     openNews,
     showModal,
     selectedNews,
+    editNews,
+    deleteNews
   }
 }
