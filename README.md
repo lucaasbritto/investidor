@@ -35,42 +35,19 @@ git clone https://github.com/lucaasbritto/investidor.git
 cd investidor
 ```
 
-2. **Copie o arquivo de ambiente para produção**
-```bash
-  cp backend/.env.example backend/.env
-```
-
-3. **Configure o nome do banco em .env**
-```env
-DB_DATABASE=investidor
-```
-
-4. **Suba os containers com Docker**
+2. **Suba os containers com Docker**
 ```shell
-  docker-compose up --build -d
+  docker-compose up --build
 ```
 
-5. **Entre no container**
-```shell
-  docker exec -it laravel_app_investidor bash
-```
+### Tudo será configurado automaticamente:
+  - Dependências PHP instaladas
+  - **.env** e **.env.testing** criados a partir do **.env.example**
+  - Chaves Laravel e JWT geradas
+  - **Migrations** e **Seeders** executados
 
-6. **Gere a chave da aplicação**
-```shell
-  php artisan key:generate
-```
 
-7. **Gere a chave JWT**
-```shell
-  php artisan jwt:secret
-```
-
-8. **Rode as migrações e os seeders**
-```shell
-  php artisan migrate --seed
-```
-
-9. **Os Seeders criam**
+3. **Os Seeders criam**
   - 1 usuario
   - 3 noticias
   - 3 categorias  
@@ -87,59 +64,25 @@ DB_DATABASE=investidor
 
 
 
-## Rodando os Testes
-- Foram criados **testes de feature**.
-- Os testes usam o arquivo .env.testing
-- Por segurança, o arquivo `.env.testing` **não está incluído no versionamento do Git** (ignorado via `.gitignore`).
-- Cada desenvolvedor deve criá-lo localmente na pasta raiz 'investidor' com o comando:
+## Testes Automatizados
+- O projeto inclui **testes de feature** para garantir que as funcionalidades principais do backend estejam funcionando corretamente.
 
 
-1. **Criando o .env.testing**
-```bash
-cp backend/.env.example backend/.env.testing
-```
+1. **Testes implementados**
+  - NewsServiceTest
+    - Criação de notícia no banco
+    - Atualização de notícia
+    - Exclusão (soft delete) de notícia
+    - Filtro por título
+    - Retorno de notícias paginadas corretamente
 
-2. **Configure o nome do banco em .env.testing**
-```env
-DB_DATABASE=investidor_testing
-```
+  - Todos os testes usam o **banco de teste** (.env.testing) e não afetam os dados reais.
 
-3. **Acesse o container**
-```bash
+2. **Executando o teste:**
+```shell
   docker exec -it laravel_app_investidor bash
-```
-
-4. **Gere a chave da aplicação para testes**
-```bash
-  php artisan key:generate --env=testing
-```
-
-5. **Gere a chave JWT para testes**
-```bash
-  php artisan jwt:secret --env=testing
-```
-
-6. **Execute o teste**
-```bash
   php artisan test
 ```
-
-## Variáveis obrigatórias no .env
-
-```env
-APP_NAME=Laravel
-APP_KEY=           # Gerado via php artisan key:generate
-DB_HOST=db
-DB_PORT=3306
-DB_DATABASE=investidor
-DB_USERNAME=laravel
-DB_PASSWORD=laravel
-QUEUE_CONNECTION=database
-JWT_SECRET=        # Gerado via php artisan jwt:secret
-```
-- (Essas informações do banco estão pre configuradas no Docker)
-
-
 
 ## Endpoints principais
 
