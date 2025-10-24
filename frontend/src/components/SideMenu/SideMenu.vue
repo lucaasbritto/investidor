@@ -5,24 +5,6 @@
       <span class="drawer-title">Dashboard</span>
     </div>
 
-    <div class="search-container q-pa-xs">
-      <q-input
-        dense
-        outlined
-        rounded
-        v-model="search"
-        placeholder="Pesquisar noticia..."
-        class="search-input"
-        color="grey-7"
-        input-class="text-caption"
-        bg-color="white"
-      >
-        <template #prepend>
-          <q-icon name="search" size="14px" color="grey-7" />
-        </template>
-      </q-input>
-    </div>
-
     <div class="menu-container">
       <div class="section-title">
         <q-icon name="menu_book" size="10px" class="section-icon" />
