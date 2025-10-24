@@ -10,11 +10,15 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-         Category::insert([
-            ['name' => 'Economia'],
-            ['name' => 'Tecnologia'],
-            ['name' => 'Esportes'],
-            ['name' => 'Política'],
-        ]);
+        $categories = [
+            'Economia',
+            'Tecnologia',
+            'Esportes',
+            'Política',
+        ];
+
+        foreach ($categories as $name) {
+            Category::create(['name' => $name]);
+        }
     }
 }
