@@ -21,7 +21,7 @@ export function useCategoryList() {
   const columns: QTableColumn<CategoryRow>[] = [
     { name: 'id', label: 'ID', field: 'id', align: 'left', sortable: true },
     { name: 'name', label: 'Nome', field: 'name', align: 'left', sortable: true },
-    { name: 'actions', label: 'Ações', field: (row) => '', align: 'center' },
+    { name: 'actions', label: 'Ações', field: (_) => '', align: 'center' },
   ]
 
   const openEditModal = (category: CategoryRow) => {
