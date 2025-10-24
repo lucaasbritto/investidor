@@ -104,6 +104,6 @@ cd investidor
 ##  Comandos úteis
 
 - Parar containers: `docker-compose down`
-- Subir containers: `docker-compose up --build -d`
+- Subir containers: `docker-compose up --build`
 - Acessar o container: `docker exec -it laravel_app_investidor bash`
 - Rodar seeders novamente: `php artisan migrate:fresh --seed`
