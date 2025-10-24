@@ -36,20 +36,11 @@
         </q-item-section>
         <q-item-section>Listar</q-item-section>
       </q-item>
-
-      <q-item clickable v-ripple @click="$router.push('/category/create')" exact active-class="menu-item-active" dense>
-        <q-item-section avatar>
-          <q-icon name="person_add" size="13px" />
-        </q-item-section>
-        <q-item-section>Cadastrar</q-item-section>
-      </q-item>
     </div>
   </q-drawer>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-const search = ref('')
 </script>
 
 <style scoped lang="scss">

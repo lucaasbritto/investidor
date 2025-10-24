@@ -38,6 +38,14 @@ export function useNewsList(filters?: Filters) {
 
   const truncateTitle = (title: string, max = 50) => truncate(title, max)
 
+  const truncateHTML = (html: string, maxLength = 100) => {
+    const div = document.createElement('div')
+    div.innerHTML = html
+    let text = div.textContent || div.innerText || ''
+    if (text.length > maxLength) text = text.substring(0, maxLength) + '...'
+    return text
+  }
+
   const reloadNews = async (page = 1) => {
     loading.value = true
     try {
@@ -155,7 +163,7 @@ export function useNewsList(filters?: Filters) {
     categories,
     loading,
     deletingId,
-    truncate,
+    truncateHTML,
     truncateTitle,
     currentPage,
     totalPages,

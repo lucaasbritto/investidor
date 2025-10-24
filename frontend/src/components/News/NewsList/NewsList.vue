@@ -34,7 +34,7 @@
             </div>
 
             <div class="news-title text-weight-medium q-mt-xs">{{ truncateTitle(news.title) }}</div>
-            <div class="news-content text-grey-7 ellipsis-3-lines">{{ truncate(news.content, 50) }}</div>
+            <div class="news-content text-grey-7 ellipsis-3-lines" v-html="truncateHTML(news.content, 50)"></div>
           </q-card-section>
 
           <q-separator />
@@ -92,7 +92,7 @@ const {
   categories,
   loading,
   deletingId,
-  truncate,
+  truncateHTML,
   truncateTitle,
   currentPage,
   totalPages,

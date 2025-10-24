@@ -18,9 +18,7 @@
       </div>
 
       <q-separator spaced color="grey-4" />
-      <div class="q-mt-md content">
-        {{ news?.content }}
-      </div>
+      <div class="q-mt-md content" v-html="news?.content"></div>
 
       <div class="q-mt-md flex justify-end">
         <q-btn
