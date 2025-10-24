@@ -12,6 +12,13 @@ services:
       - db
     networks:
       - investidor-network
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: investidor
+      DB_USERNAME: laravel
+      DB_PASSWORD: laravel
 
   webserver:
     image: nginx:alpine
