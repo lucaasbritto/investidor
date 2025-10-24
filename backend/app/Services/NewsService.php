@@ -6,11 +6,19 @@ use App\Models\News;
 
 class NewsService
 {
-    public function getNews(){
-        return News::with('category:id,name')
-            ->select('id', 'title', 'content', 'category_id', 'created_at')
-            ->latest()
-            ->paginate(10);
+    public function getNews(array $filters = []){
+        $query = News::with('category:id,name')
+            ->select('id', 'title', 'content', 'category_id', 'created_at');
+        
+        if (!empty($filters['title'])) {
+            $query->where('title', 'like', '%' . $filters['title'] . '%');
+        }
+
+        if (!empty($filters['category_id'])) {
+            $query->where('category_id', $filters['category_id']);
+        }
+
+        return $query->latest()->paginate(10);
     }
 
     public function createNews(array $data){

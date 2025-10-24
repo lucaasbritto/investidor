@@ -16,8 +16,13 @@ class NewsController extends Controller
         $this->newsService = $newsService;
     }
 
-    public function index(){
-        $news = $this->newsService->getNews();
+    public function index(Request $request){
+        $filters = [
+            'title'       => $request->query('title'),
+            'category_id' => $request->query('category_id')
+        ];
+
+        $news = $this->newsService->getNews($filters);
         
         return NewsResource::collection($news);
     }

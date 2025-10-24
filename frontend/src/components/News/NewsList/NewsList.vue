@@ -4,6 +4,17 @@
       <q-spinner-dots size="40px" color="primary" />
     </div>
 
+    <div
+      v-else-if="newsList.length === 0"
+      class="no-news-container text-grey-7 text-center q-pa-lg"
+    >
+      <q-icon name="newspaper" size="40px" color="grey-6" class="q-mb-sm" />
+      <div class="text-subtitle1">Nenhuma notícia encontrada</div>
+      <div class="text-caption text-grey-6">
+        Tente ajustar os filtros de busca ou crie uma nova notícia.
+      </div>
+    </div>
+
     <div v-else class="row q-col-gutter-md justify-start">
       <div v-for="news in newsList" :key="news.id" class="col-12 col-sm-6 col-md-4 col-lg-3">
         <q-card class="news-card relative-position">
@@ -52,6 +63,17 @@ import { useNewsList } from './NewsList'
 import NewsDetailModal from '@/components/News/NewsModal/NewsDetail/NewsDetailModal.vue'
 import NewsEditModal from '@/components/News/NewsModal/NewsEdit/NewsEditModal.vue'
 
+const props = defineProps({
+  searchTitle: {
+    type: String,
+    default: ''
+  },
+  searchCategoryId: {
+    type: [Number, null],
+    default: null
+  }
+})
+
 const {
   newsList,
   categories,
@@ -67,7 +89,7 @@ const {
   openEditModal,
   deleteNews,
   reloadNews
-} = useNewsList()
+} = useNewsList(props)
 </script>
 
 <style lang="scss" scoped>

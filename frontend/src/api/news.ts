@@ -22,9 +22,17 @@ export interface UpdateNewsPayload {
   category_id?: number
 }
 
-export async function fetchNews(): Promise<News[]> {
+export async function fetchNews(filters?: {
+  title?: string
+  category_id?: number
+}): Promise<News[]> {
   try {
-    const response = await api.get('/news')
+    const response = await api.get('/news', {
+      params: {
+        title: filters?.title,
+        category_id: filters?.category_id
+      }
+    })
     return response.data.data
   } catch (error: any) {
     console.error('Erro ao buscar notícias:', error)

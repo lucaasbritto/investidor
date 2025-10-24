@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { fetchNews, type News, createNews, updateNews, deleteNews as apiDeleteNews, type CreateNewsPayload } from '@/api/news'
 import { Notify, Dialog  } from 'quasar'
 import { useCategories } from '@/stores/category'
@@ -10,7 +10,12 @@ export interface EditableNews {
   category_id: number | null
 }
 
-export function useNewsList() {
+interface Filters {
+  searchTitle?: string
+  searchCategoryId?: number | null
+}
+
+export function useNewsList(filters?: Filters) {
   const newsList = ref<News[]>([])
   const loading = ref(false)
   const deletingId = ref<number | null>(null)
@@ -24,22 +29,40 @@ export function useNewsList() {
   const { categories, loadCategories } = useCategories()
 
   const truncate = (text: string, max = 100) =>
-    text.length > max ? text.substring(0, max) + '...' : text
+    text?.length > max ? text.substring(0, max) + '...' : text
 
   const truncateTitle = (title: string, max = 50) => truncate(title, max)
 
   const reloadNews = async () => {
     loading.value = true
     try {
-      newsList.value = await fetchNews()
+      newsList.value = await fetchNews({
+        title: filters?.searchTitle || undefined,
+        category_id: filters?.searchCategoryId || undefined
+      })
+    } catch (err) {
+      console.error(err)
+      Notify.create({
+        message: 'Erro ao carregar notícias',
+        color: 'negative',
+        icon: 'error'
+      })
     } finally {
       loading.value = false
     }
   }
 
+  if (filters) {
+    watch(
+      () => [filters.searchTitle, filters.searchCategoryId],
+      () => reloadNews(),
+      { deep: true }
+    )
+  }
+
   onMounted(async () => {
+    loadCategories()
     reloadNews()
-    await loadCategories()
   })
 
   const openDetailModal = (news: News) => {
