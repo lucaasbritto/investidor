@@ -54,7 +54,7 @@ export function useCategoryList() {
 
   const reload = () => loadCategories()
 
-  const rowClass = (row: CategoryRow) => 'q-hoverable cursor-pointer'
+  const rowClass = () => 'q-hoverable cursor-pointer'
 
   onMounted(loadCategories)
 
