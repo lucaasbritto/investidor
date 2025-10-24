@@ -18,7 +18,7 @@ class NewsService
             $query->where('category_id', $filters['category_id']);
         }
 
-        return $query->latest()->paginate(10);
+        return $query->latest()->paginate(6);
     }
 
     public function createNews(array $data){

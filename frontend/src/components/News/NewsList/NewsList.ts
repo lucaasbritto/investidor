@@ -20,6 +20,11 @@ export function useNewsList(filters?: Filters) {
   const loading = ref(false)
   const deletingId = ref<number | null>(null)
 
+  const currentPage = ref(1)
+  const perPage = ref(10)
+  const totalPages = ref(1)
+  const totalItems = ref(0)
+
   const showDetailModal = ref(false)
   const selectedNews = ref<News | null>(null)
 
@@ -33,13 +38,21 @@ export function useNewsList(filters?: Filters) {
 
   const truncateTitle = (title: string, max = 50) => truncate(title, max)
 
-  const reloadNews = async () => {
+  const reloadNews = async (page = 1) => {
     loading.value = true
     try {
-      newsList.value = await fetchNews({
-        title: filters?.searchTitle || undefined,
-        category_id: filters?.searchCategoryId || undefined
+      const res = await fetchNews({
+        title: filters?.searchTitle,
+        category_id: filters?.searchCategoryId ?? undefined,
+        page
       })
+
+      newsList.value = res.data
+      totalItems.value = res.meta.total
+      perPage.value = res.meta.per_page
+      totalPages.value = res.meta.last_page
+      currentPage.value = res.meta.current_page
+
     } catch (err) {
       console.error(err)
       Notify.create({
@@ -55,7 +68,7 @@ export function useNewsList(filters?: Filters) {
   if (filters) {
     watch(
       () => [filters.searchTitle, filters.searchCategoryId],
-      () => reloadNews(),
+      () => reloadNews(1),
       { deep: true }
     )
   }
@@ -72,20 +85,9 @@ export function useNewsList(filters?: Filters) {
 
   
   const openEditModal = (news?: News) => {
-    if (news) {
-      selectedNewsEdit.value = {
-        id: news.id,
-        title: news.title,
-        content: news.content,
-        category_id: news.category?.id || null
-      }
-    } else {
-      selectedNewsEdit.value = {
-        title: '',
-        content: '',
-        category_id: null
-      }
-    }
+    selectedNewsEdit.value = news
+      ? { id: news.id, title: news.title, content: news.content, category_id: news.category?.id || null }
+      : { title: '', content: '', category_id: null }
     showEditModal.value = true
   }
 
@@ -120,7 +122,7 @@ export function useNewsList(filters?: Filters) {
   const deleteNews = async (news: News) => {
     Dialog.create({
       title: 'Confirmar exclusão',
-      message: `Deseja realmente excluir a notícia "${news.title}"?`,
+      message: `Deseja realmente excluir "${news.title}"?`,
       cancel: true,
       persistent: true,
     })
@@ -155,6 +157,10 @@ export function useNewsList(filters?: Filters) {
     deletingId,
     truncate,
     truncateTitle,
+    currentPage,
+    totalPages,
+    perPage,
+    totalItems,
     showDetailModal,
     selectedNews,
     openDetailModal,
@@ -164,6 +170,7 @@ export function useNewsList(filters?: Filters) {
     closeEditModal,
     saveNews,
     deleteNews,
-    reloadNews
+    reloadNews,    
+    loadCategories
   }
 }

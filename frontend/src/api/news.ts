@@ -25,15 +25,20 @@ export interface UpdateNewsPayload {
 export async function fetchNews(filters?: {
   title?: string
   category_id?: number
-}): Promise<News[]> {
+  page?: number
+}): Promise<{ data: News[], meta: any }> {
   try {
     const response = await api.get('/news', {
       params: {
         title: filters?.title,
-        category_id: filters?.category_id
+        category_id: filters?.category_id,
+        page: filters?.page || 1
       }
     })
-    return response.data.data
+    return {
+      data: response.data.data,
+      meta: response.data.meta
+    }
   } catch (error: any) {
     console.error('Erro ao buscar notícias:', error)
     throw new Error(error.response?.data?.message || 'Erro ao buscar notícias')

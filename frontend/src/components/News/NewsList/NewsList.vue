@@ -47,6 +47,19 @@
       </div>
     </div>
 
+    <div v-if="totalPages > 1" class="q-mt-md flex justify-center">
+      <q-pagination
+        v-model="currentPage"
+        :max="totalPages"
+        boundary-numbers
+        max-pages="5"
+        color="primary"
+        dense
+        size="sm"
+        @update:model-value="reloadNews"
+      />
+    </div>
+
     <NewsDetailModal v-model="showDetailModal" :news="selectedNews" />
 
     <NewsEditModal
@@ -81,6 +94,8 @@ const {
   deletingId,
   truncate,
   truncateTitle,
+  currentPage,
+  totalPages,
   showDetailModal,
   selectedNews,
   openDetailModal,
