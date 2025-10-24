@@ -17,6 +17,7 @@
           color="grey-7"
           input-class="text-caption"
           bg-color="white"
+          debounce="700"
         >
           <template #prepend>
             <q-icon name="search" size="14px" color="grey-7" />
