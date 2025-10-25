@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
+import logo from '@/assets/logo-investidor.webp'
 
 export function LoginPageScript() {
   const email = ref('')
@@ -30,6 +31,7 @@ export function LoginPageScript() {
     password,
     loading,
     error,
+    logo,
     handleLogin
   }
 }

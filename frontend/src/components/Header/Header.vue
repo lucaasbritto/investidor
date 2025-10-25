@@ -3,7 +3,7 @@
     <div class="row items-center justify-between full-width divHeader">
 
       <div class="row items-center">
-        <img src="/images/logo-investidor-white.svg" alt="Logo" height="20" class="" />
+        <img :src="logo" alt="Logo" height="20" />
       </div>
         
 
@@ -40,7 +40,7 @@
 <script setup>
 import headerScript from './Header.js'
 
-const { user, logout } = headerScript()
+const { user, logout, logo } = headerScript()
 </script>
 
 <style scoped lang="scss">

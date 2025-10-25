@@ -2,7 +2,7 @@
   <div class="q-pa-md flex flex-center login-page">    
     <q-card class="q-pa-xl login-card">
       <div class="text-center q-mb-md">
-        <img src="/images/logo-investidor.webp" alt="Logo" class="logo q-mb-sm" />
+        <img :src="logo" alt="Logo" class="logo q-mb-sm" />
         <div class="text-grey"><small>Bem-vindo a sua Carteira de Finanças</small></div>
       </div>
 
@@ -66,7 +66,7 @@
 <script setup lang="ts">
 import { LoginPageScript } from './LoginPage.js';
 
-const { email, password, loading, error, handleLogin } = LoginPageScript()
+const { email, password, loading, error, logo, handleLogin } = LoginPageScript()
 
 </script>
 

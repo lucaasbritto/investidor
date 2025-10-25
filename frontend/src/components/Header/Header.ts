@@ -1,6 +1,8 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
+import logo from '@/assets/logo-investidor-white.svg'
+
 
 interface User {
   id: number
@@ -21,6 +23,7 @@ export default function headerScript() {
 
   return {
     user,
-    logout
+    logout,
+    logo
   }
 }
